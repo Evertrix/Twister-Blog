@@ -1,0 +1,4 @@
+{{--Example!!!--}}
+<div>
+    {{$slot}}
+</div>
