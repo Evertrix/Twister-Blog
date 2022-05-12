@@ -316,7 +316,7 @@
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
         <!-- Search -->
-        <div class="relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
+        <div class="search-bar relative flex lg:inline-flex items-center bg-gray-100 rounded-xl px-3 py-2">
             <form method="GET" action="/">
                 {{--If we have anything in the request category, add hidden input--}}
                 @if(request('category'))
@@ -336,13 +336,17 @@
 
 </section>
 
-<h1 class="[toggle === '1' ? 'text-white-800' : 'text-gray-800'] w-full my-2 text-5xl font-bold leading-tight text-center">
-    Pricing</h1>
-<div class="w-full mb-4">
-    <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-</div>
+<section class="info-section bg-gray-100 py-8" id="plans">
 
-        <x-subscriptions.plans plans="$plans"/>
+    <h1 class="[toggle === '1' ? 'text-white-800' : 'text-gray-800'] w-full my-2 text-5xl font-bold leading-tight text-center">
+        Pricing</h1>
+    <div class="w-full mb-4">
+        <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+    </div>
+
+    <x-subscriptions.plans plans="$plans"/>
+
+</section>
 
 <section class="info-section bg-gray-100 py-8" id="newsletter">
 

@@ -2,7 +2,7 @@
     <x-content-site>
         <x-slot name="posts_slot">
             @if($posts->count())
-                <x-posts :posts="$posts"/>
+{{--                <x-posts :posts="$posts"/>--}}
                 <x-post-card :posts="$posts"/>
             @else
                 <p class="text-center m-auto">No posts yet. Please, check back later.</p>
