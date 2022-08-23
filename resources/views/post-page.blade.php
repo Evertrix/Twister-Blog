@@ -12,10 +12,6 @@
                     <div class="flex items-center lg:justify-center text-sm mt-4">
                         <img src="{{ asset('storage/images/'.$post->image) }}"
                              alt="{{ asset('storage/images/'.$post->image) }}">
-{{--                        <div class="ml-3 text-left">--}}
-{{--                                                        <h5 class="font-bold">{{ $post->author->name }}</h5>--}}
-{{--                            <h6>Mascot at Laracasts</h6>--}}
-{{--                        </div>--}}
                     </div>
                 </div>
 
@@ -108,53 +104,53 @@
                                 <article> {!! $comment->body !!} </article>
 
 {{--                                Toggle function for creating a reply to a comment--}}
-                                <div x-data="{ show: false }">
-                                    <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"
-                                            :class="{ 'active': show }">
-                                        Toggle Show
-                                    </button>
+{{--                                <div x-data="{ show: false }">--}}
+{{--                                    <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"--}}
+{{--                                            :class="{ 'active': show }">--}}
+{{--                                        Toggle Show--}}
+{{--                                    </button>--}}
 
-                                    <div x-show="show">
+{{--                                    <div x-show="show">--}}
 
-                                        <a href="" id="reply"></a>
+{{--                                        <a href="" id="reply"></a>--}}
 {{--                                        Form for the Reply Comment function--}}
-                                        <form method="post" action="{{ route('comments.store') }}">
-                                            @csrf
-                                            <div class="form-group">
-                                                <x-form.textarea name="body"/>
-                                                <input type="hidden" name="post_id" value="{{ $comment->post_id }}"/>
-                                                <input type="hidden" name="parent_id" value="{{ $comment->id }}"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <x-submit-button>Reply</x-submit-button>
-                                            </div>
-                                            <hr/>
-                                        </form>
-                                    </div>
+{{--                                        <form method="post" action="{{ route('comments.store') }}">--}}
+{{--                                            @csrf--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <x-form.textarea name="body"/>--}}
+{{--                                                <input type="hidden" name="post_id" value="{{ $comment->post_id }}"/>--}}
+{{--                                                <input type="hidden" name="parent_id" value="{{ $comment->id }}"/>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="form-group">--}}
+{{--                                                <x-submit-button>Reply</x-submit-button>--}}
+{{--                                            </div>--}}
+{{--                                            <hr/>--}}
+{{--                                        </form>--}}
+{{--                                    </div>--}}
 
 
-                                </div>
+{{--                                </div>--}}
                             </div>
                         </article>
 
                     </div>
 {{--                    Replies of a specific comment--}}
-                    <div class="ml-20">
-                            @include('components.replies', ['comments' => $comment->replies->take(1)])
+{{--                    <div class="ml-20">--}}
+{{--                            @include('components.replies', ['comments' => $comment->replies->take(1)])--}}
 
-                        <div x-data="{ show: false }">
-                            <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"
-                                    :class="{ 'active': show }">
-                                Show Replies
-                            </button>
+{{--                        <div x-data="{ show: false }">--}}
+{{--                            <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"--}}
+{{--                                    :class="{ 'active': show }">--}}
+{{--                                Show Replies--}}
+{{--                            </button>--}}
 
-                            <div x-show="show">
-                                @include('components.replies', ['comments' => $comment->replies->take(1)])
-                            </div>
-                        </div>
+{{--                            <div x-show="show">--}}
+{{--                                @include('components.replies', ['comments' => $comment->replies->take(1)])--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
 
-                    </div>
+{{--                    </div>--}}
 {{--                    @endif--}}
                 @endforeach
 
@@ -197,52 +193,52 @@
                                             <article> {!! $comment->body !!} </article>
 
 {{--                                                                            Toggle function for creating a reply to a comment--}}
-                                            <div x-data="{ show: false }">
-                                                <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"
-                                                        :class="{ 'active': show }">
-                                                    Toggle Show
-                                                </button>
+{{--                                            <div x-data="{ show: false }">--}}
+{{--                                                <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"--}}
+{{--                                                        :class="{ 'active': show }">--}}
+{{--                                                    Toggle Show--}}
+{{--                                                </button>--}}
 
-                                                <div x-show="show">
+{{--                                                <div x-show="show">--}}
 
-                                                    <a href="" id="reply"></a>
+{{--                                                    <a href="" id="reply"></a>--}}
 {{--                                                                                            Form for the Reply Comment function--}}
-                                                    <form method="post" action="{{ route('comments.store') }}">
-                                                        @csrf
-                                                        <div class="form-group">
-                                                            <x-form.textarea name="body"/>
-                                                            <input type="hidden" name="post_id" value="{{ $comment->post_id }}"/>
-                                                            <input type="hidden" name="parent_id" value="{{ $comment->id }}"/>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <x-submit-button>Reply</x-submit-button>
-                                                        </div>
-                                                        <hr/>
-                                                    </form>
-                                                </div>
+{{--                                                    <form method="post" action="{{ route('comments.store') }}">--}}
+{{--                                                        @csrf--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <x-form.textarea name="body"/>--}}
+{{--                                                            <input type="hidden" name="post_id" value="{{ $comment->post_id }}"/>--}}
+{{--                                                            <input type="hidden" name="parent_id" value="{{ $comment->id }}"/>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <x-submit-button>Reply</x-submit-button>--}}
+{{--                                                        </div>--}}
+{{--                                                        <hr/>--}}
+{{--                                                    </form>--}}
+{{--                                                </div>--}}
 
 
-                                            </div>
+{{--                                            </div>--}}
                                         </div>
                                     </article>
 
                                 </div>
 
-                                <div class="ml-20">
-                                        @include('components.replies', ['comments' => $comment->replies])
+{{--                                <div class="ml-20">--}}
+{{--                                        @include('components.replies', ['comments' => $comment->replies])--}}
 
-                                    <div x-data="{ show: false }">
-                                        <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"
-                                                :class="{ 'active': show }">
-                                            Show Replies
-                                        </button>
+{{--                                    <div x-data="{ show: false }">--}}
+{{--                                        <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"--}}
+{{--                                                :class="{ 'active': show }">--}}
+{{--                                            Show Replies--}}
+{{--                                        </button>--}}
 
-                                        <div x-show="show">
-                                            @include('components.replies', ['comments' => $comment->replies])
-                                        </div>
-                                    </div>
+{{--                                        <div x-show="show">--}}
+{{--                                            @include('components.replies', ['comments' => $comment->replies])--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
-                                </div>
+{{--                                </div>--}}
                             @endforeach
                         </div>
                     </div>
