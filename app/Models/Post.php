@@ -51,6 +51,10 @@ class Post extends Model implements HasMedia
         return 'slug';
     }
 
+    public function setSlugAttribute($value) {
+        $this->attributes['slug'] = str_replace(" ", "-", lcfirst($value));
+    }
+
     public function comments()
     {
         // hasOne, hasMany, belongsTo, belongsToMany
