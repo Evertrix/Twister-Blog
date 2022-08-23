@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ChangePasswordRequest;
+use App\Services\ChangePasswordService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -13,26 +15,9 @@ class ChangePasswordController extends Controller
         return view('sessions.change-password');
     }
 
-    public function changePassword(Request $request)
+    public function changePassword(ChangePasswordRequest $request)
     {
-        $user = Auth::user();
-
-        $userPassword = $user->password;
-
-        $request->validate([
-            'current_password' => 'required',
-            'password' => 'required|same:confirm_password|min:6',
-            'confirm_password' => 'required',
-        ]);
-
-        if (!Hash::check($request->current_password, $userPassword)) {
-            return back()->withErrors(['current_password'=>'password not match']);
-        }
-
-        $user->password = Hash::make($request->password);
-
-        $user->save();
-
+        ChangePasswordService::changePassword($request);
         return redirect('/')->with('success','password successfully updated');
     }
 }
