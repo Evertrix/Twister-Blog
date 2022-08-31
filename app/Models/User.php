@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Stripe\Plan;
 use Stripe\Subscription;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable, Billable;
 
