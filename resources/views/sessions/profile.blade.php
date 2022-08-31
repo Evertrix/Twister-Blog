@@ -91,7 +91,7 @@
                     <button type="submit"
                             class="bg-blue-400 text-white rounded py-2 px-4
                             hover:bg-blue-500">
-                        <a href="/change/{{ auth()->user()->username }}/password">Change Password</a>
+                        <a href="{{ route('password.request')}}">Change Password</a>
                     </button>
                 </div>
                 {{--                if there are any errors, then show them with the foreach--}}
@@ -103,6 +103,13 @@
                     </ul>
                 @endif
             </form>
+{{--            <div class="mb-6">--}}
+{{--                <button type="submit"--}}
+{{--                        class="bg-blue-400 text-white rounded py-2 px-4--}}
+{{--                            hover:bg-blue-500">--}}
+{{--                    <a href="{{ route('password.reset')}}">Change Password</a>--}}
+{{--                </button>--}}
+{{--            </div>--}}
 
         </main>
     </section>
