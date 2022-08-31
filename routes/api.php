@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PostApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+Route::group(['namespace' => 'Post'], function() {
+
+    Route::get('/', [PostApiController::class, 'index']);
+
+    Route::get('/posts/{post}', [PostApiController::class, 'show']);
+
+    Route::post('/post', [PostApiController::class, 'store']);
+
+    Route::put('/posts/{post}', [PostApiController::class, 'update']);
+
+    Route::delete('/posts/{post}', [PostApiController::class, 'destroy']);
 });
