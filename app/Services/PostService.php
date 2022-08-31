@@ -12,10 +12,28 @@ use Illuminate\Validation\Rule;
 
 class PostService {
 
+    /**
+     * Return all exising posts.
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getPosts()
+    {
+        return Post::all();
+    }
+
+    /**
+     * Return selected if existing exising posts.
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public static function getPost($id) {
+        return Post::findOrFaid($id);
+    }
+
     public static function createPost(PostRequest $request) {
 
         Post::create(array_merge($request->validated(), [
             'user_id' => Auth::id(),
+//            'user_id' => Auth::user()-/>id,
             'image' => self::handleUploadedImage($request, 'image')
         ]));
 
