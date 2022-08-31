@@ -29,6 +29,12 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->middleware(['auth'
 Route::get('/category/{category}', [PostController::class, 'category'])->middleware(['auth','verified']);
 Route::get('/user/{user}', [PostController::class, 'user'])->middleware(['auth','verified']);
 
+Route::post('post', [PostController::class, 'store'])->name('post.store')->middleware(['auth','verified']);
+
+Route::put('posts/{post}', [PostController::class, 'update'])->name('updatePost');
+
+Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+
 
 Route::group(['namespace' => 'Subscriptions'], function() {
     Route::get('plans', [SubscriptionController::class, 'index'])->name('plans')->middleware(['auth','verified']);
@@ -45,12 +51,6 @@ Route::post('ckeditor/image_upload', [CKEditorController::class, 'store'])->name
 Route::middleware([CheckIfPaied::class])->group(function() {
     Route::get('post/create', [PostController::class, 'create'])->middleware('auth');
 });
-
-Route::post('post', [PostController::class, 'store'])->name('post.store')->middleware(['auth','verified']);
-
-Route::put('posts/{post}', [PostController::class, 'update'])->name('updatePost');
-
-Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 
 Route::get('profile/{user}/edit', [SessionsController::class, 'profile_page'])->middleware(['auth','verified']);
 Route::put('profile/{user}/edit', [SessionsController::class, 'update'])->name('profile.update')->middleware(['auth','verified']);
