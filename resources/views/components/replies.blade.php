@@ -33,7 +33,7 @@
                 <div x-show="show">
 
                     <a href="" id="reply"></a>
-                    <form method="post" action="{{ route('comments.store') }}">
+                    <form method="post" action="{{ route('reply.store') }}">
                         @csrf
                         <div class="form-group">
                         <textarea

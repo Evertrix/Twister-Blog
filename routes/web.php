@@ -58,6 +58,7 @@ Route::put('profile/{user}/edit', [SessionsController::class, 'update'])->name('
 //Route::get('change/{user}/password',  [ChangePasswordController::class,'getPageChangePassword'])->middleware(['auth','verified']);
 //Route::post('change/{user}/password',  [ChangePasswordController::class,'changePassword'])->name('profile.change.password')->middleware(['auth','verified']);
 
-Route::post('comments', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/comments', [CommentController::class, 'storeComment'])->name('comments.store');
+Route::post('/reply', [CommentController::class, 'storeReply'])->name('reply.store');
 
 require __DIR__.'/auth.php';
