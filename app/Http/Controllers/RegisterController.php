@@ -14,9 +14,4 @@ class RegisterController extends Controller
     public function create(){
         return view('register.create');
     }
-
-    public function store(RegisterRequest $request){
-        RegisterService::registerUser($request);
-        return redirect('/')->with('success', 'Account created successfully!!!');
-    }
 }
