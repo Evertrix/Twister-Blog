@@ -37,15 +37,11 @@ class PostFactory extends Factory
     {
         $image = $this->faker->image();
         $imageFile = new File($image);
-//        Storage::disk('public')->putFile('images', $imageFile);
-//        Storage::put('images/', $imageFile);
 
         return [
             'user_id' => User::factory(),
             'category_id' => Category::factory(),
             'title' => $this->faker->sentence(),
-//            'image' => $this->faker->image('public/storage/images',640,480, null, false),
-//            'image' => str_replace('/tmp/', '', $imageFile),
             'image' => str_replace('images/', '', Storage::disk('public')->putFile('images', $imageFile)),
             'slug' => $this->faker->slug(),
             'excerpt' => '<p>'.implode('</p><p>', $this->faker->sentences(3)).'</p>',

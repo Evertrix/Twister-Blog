@@ -22,11 +22,6 @@ class PostService {
     }
 
     public static function updatePost(PostRequest $request, Post $post) {
-        // Validation for requiring a certain fields to be changed before submitting the update
-//        $post = Post::find($id);
-        // Checking if the image upload field has been changed.
-        // If changed, delete the current image from Storage and upload the new selected.
-
         // Check if user is the post author
         if(Auth::user()->id == $post->user_id) {
 
@@ -54,14 +49,10 @@ class PostService {
         $imageName = '';
         if (!is_null($image)) {
             if($request->hasFile($image)){
-//                $imageName = time() . '.' . $request->file('image')->extension();
-//                $imageName = $request->$image;
-//                $imageFile = str_replace('/tmp/', '', new File($imageName));
-//                $request->file('image')->storeAs('public/images', $imageName);
-                $storageImage = Storage::putFile('public/images', $request->file($image));
+                $imageName = Storage::putFile('public/images', $request->file($image));
             }
         }
-        return str_replace('public/images/', '', $storageImage);
+        return str_replace('public/images/', '', $imageName);
     }
 
 

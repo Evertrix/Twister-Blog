@@ -38,12 +38,6 @@ class Post extends Model implements HasMedia
         $query->when($filters['user'] ?? false, fn($query, $user) => $query->whereHas('user', fn($query) => $query->where('username', $user)
         ),
         );
-//            $query
-//                ->whereExists(fn($query) =>
-//                    $query->from('categories')
-//                        ->whereColumn('categories.id', 'posts.category_id')
-//                        ->where('categories.slug', $category))
-//                );
     }
 
     public function getRouteKeyName()
