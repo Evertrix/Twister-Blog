@@ -18,14 +18,14 @@ class SessionsController extends Controller
         return view('sessions.login');
     }
 
-    public function store(LoginRequest $request){
-
-        SessionsService::loginUser($request);
-
-        return ValidationException::withMessages([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
-    }
+//    public function store(LoginRequest $request){
+//
+//        SessionsService::loginUser($request);
+//
+//        return ValidationException::withMessages([
+//            'email' => 'The provided credentials do not match our records.',
+//        ]);
+//    }
 
     public function profile_page(){
         return view('sessions.profile');
