@@ -23,17 +23,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [PostController::class, 'index']);
-Route::get('/posts', [PostController::class, 'index'])->middleware(['auth','verified']);
-Route::get('/posts/{post}', [PostController::class, 'show'])->middleware(['auth','verified']);
-Route::get('/category/{category}', [PostController::class, 'category'])->middleware(['auth','verified']);
-Route::get('/user/{user}', [PostController::class, 'user'])->middleware(['auth','verified']);
+Route::controller(PostController::class)->group(function() {
+    Route::get('/',  'index');
+    Route::get('/posts', 'index')->middleware(['auth','verified']);
+    Route::get('/posts/{post}', 'show')->middleware(['auth','verified']);
+    Route::get('/category/{category}', 'category')->middleware(['auth','verified']);
+    Route::get('/user/{user}', 'user')->middleware(['auth','verified']);
 
-Route::post('post', [PostController::class, 'store'])->name('post.store')->middleware(['auth','verified']);
-
-Route::put('posts/{post}', [PostController::class, 'update'])->name('updatePost');
-
-Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+    Route::post('post', 'store')->name('post.store')->middleware(['auth','verified']);
+    Route::put('posts/{post}', 'update')->name('updatePost');
+    Route::get('posts/{post}/edit', 'edit')->name('edit')->middleware(['auth','verified']);
+    Route::delete('posts/{post}', 'destroy')->name('post.destroy');
+});
 
 
 Route::group(['namespace' => 'Subscriptions'], function() {
@@ -41,9 +42,6 @@ Route::group(['namespace' => 'Subscriptions'], function() {
     Route::get('/payments', [PaymentController::class, 'index'])->name('payments')->middleware(['auth','verified']);
     Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store')->middleware(['auth','verified']);
 });
-
-
-Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('edit')->middleware(['auth','verified']);
 
 Route::post('newsletter', NewsletterController::class);
 Route::post('ckeditor/image_upload', [CKEditorController::class, 'store'])->name('ckeditor.upload')->middleware(['auth','verified']);
@@ -54,9 +52,6 @@ Route::middleware([CheckIfPaied::class])->group(function() {
 
 Route::get('profile/{user}/edit', [SessionsController::class, 'profile_page'])->middleware(['auth','verified']);
 Route::put('profile/{user}/edit', [SessionsController::class, 'update'])->name('profile.update')->middleware(['auth','verified']);
-
-//Route::get('change/{user}/password',  [ChangePasswordController::class,'getPageChangePassword'])->middleware(['auth','verified']);
-//Route::post('change/{user}/password',  [ChangePasswordController::class,'changePassword'])->name('profile.change.password')->middleware(['auth','verified']);
 
 Route::post('/comments', [CommentController::class, 'storeComment'])->name('comments.store');
 Route::post('/reply', [CommentController::class, 'storeReply'])->name('reply.store');
