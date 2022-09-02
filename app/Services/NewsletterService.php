@@ -8,7 +8,6 @@ use PHPUnit\Framework\Exception;
 
 class NewsletterService {
     public static function addMailToNewsletter(NewsletterRequest $request, Newsletter $newsletter) {
-        //        ddd($newsletter);
         $request->validated();
 
         try{

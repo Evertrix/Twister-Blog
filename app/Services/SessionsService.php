@@ -9,14 +9,6 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
 class SessionsService{
-//    public static function loginUser(LoginRequest $request) {
-//        // validate the request
-//        $attributes = $request->validated();
-//            if (auth()->attempt($attributes)) {
-//                return redirect('/')->with('success', 'Welcome Back!');
-//        }
-//    }
-
     public static function updateUser(SessionsRequest $request) {
 
         $user = Auth::user();

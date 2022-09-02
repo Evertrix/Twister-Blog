@@ -23,8 +23,7 @@ class Post extends Model implements HasMedia
 //        'category_id',
 //    ];
 
-    public function scopeFilter($query, $filters)
-    { // Post::newQuery()->filter();
+    public function scopeFilter($query, $filters) {
         if ($filters['search'] ?? false) {
             $query->where(fn($query) => $query->where('title', 'like', '%' . request('search') . '%')
                 ->orWhere('body', 'like', '%' . request('search') . '%')
@@ -51,7 +50,6 @@ class Post extends Model implements HasMedia
 
     public function comments()
     {
-        // hasOne, hasMany, belongsTo, belongsToMany
         return $this->hasMany(Comment::class)->whereNull('parent_id'); // A Post has Many comments
     }
 

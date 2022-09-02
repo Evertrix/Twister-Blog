@@ -53,7 +53,6 @@ class PostRequest extends FormRequest
                     'slug'  => 'nullable|unique:posts,slug,'.$this->post->id,
                     'title' => 'nullable',
                     'image' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-//                    'slug'  => ['required', Rule::unique('posts')->ignore($this->id)],
                     'excerpt' => 'nullable',
                     'body' => 'nullable',
                 ];

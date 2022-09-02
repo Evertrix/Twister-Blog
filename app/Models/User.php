@@ -62,7 +62,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function comments()
     {
-        // hasOne, hasMany, belongsTo, belongsToMany
         return $this->hasMany(Comment::class)->whereNull('parent_id'); // A Post has Many comments
     }
 
