@@ -70,183 +70,26 @@
             @endauth
 
 {{--             Comment Section--}}
-{{--            <section class="col-span-8 col-start-5 mt-10 space-y-6">--}}
+            <section class="col-span-8 col-start-5 mt-10 space-y-6">
 
 {{--                'panel' is a style blade component for adding styles to whatever it wraps in it--}}
 {{--                Main form for creating comments--}}
                 @include('comment._add-comment-form')
-            @include('components.replies', ['comments' => $post->comments, 'post_id' => $post->id])
-{{--                Loop for returning all the existing comments from the db--}}
-{{--                @foreach($post->comments->take(1) as $comment)--}}
-{{--                    <div class="display-comment" @if($comment->parent_id != null) style="margin-left:40px;" @endif>--}}
-{{--                                                Main Comment Section--}}
-{{--                        <article--}}
-{{--                            class="flex bg-{{ "toggle" === "1" ? 'gray' : 'white' }}-100 border border-gray-200 p-6 rounded-xl space-x-4">--}}
+                    @include('components.replies', ['comments' => $post->comments->take(1), 'post_id' => $post->id])
 
-{{--                            <div class="flex-shrink-0">--}}
-{{--                                <img src="@if($comment->user->profile_image == null) {{asset('/storage/avatar/default_avatar.png')}} @else {{asset('/storage/profile_image/'.$comment->user->profile_image)}} @endif" style="--}}
-{{--                        width: 60px;--}}
-{{--                        height: 60px;--}}
-{{--                        background-size: cover;--}}
-{{--                        background-position: top center;--}}
-{{--                        border-radius: 50%;--}}
-{{--                        " alt="Avatar">--}}
-{{--                            </div>--}}
-{{--                            @if($comment->user->profile_image == null) {{asset('/storage/avatar/default_avatar.png')}} @else {{asset('/storage/profile_image/'.$comment->user->profile_image)}} @endif--}}
+                    <div x-data="{ show: false }">
+                        <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"
+                                :class="{ 'active': show }">
+                            Load More
+                        </button>
 
-{{--                            Body of the comment - Author of the comment, date of post, body--}}
-{{--                            <div @if($comment->parent_id != null) style="margin-left:40px;" @endif>--}}
-{{--                                <header class="mb-4">--}}
-{{--                                    <h3 class="font-bold">{{ $comment->user->name }}</h3>--}}
-{{--                                    <p class="time-xs">Posted--}}
-{{--                                        <time>{{ $comment->created_at }}</time>--}}
-{{--                                    </p>--}}
-{{--                                </header>--}}
-{{--                                <article> {!! $comment->body !!} </article>--}}
-
-{{--                                Toggle function for creating a reply to a comment--}}
-{{--                                <div x-data="{ show: false }">--}}
-{{--                                    <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"--}}
-{{--                                            :class="{ 'active': show }">--}}
-{{--                                        Toggle Show--}}
-{{--                                    </button>--}}
-
-{{--                                    <div x-show="show">--}}
-
-{{--                                        <a href="" id="reply"></a>--}}
-{{--                                        Form for the Reply Comment function--}}
-{{--                                        <form method="post" action="{{ route('comments.store') }}">--}}
-{{--                                            @csrf--}}
-{{--                                            <div class="form-group">--}}
-{{--                                                <x-form.textarea name="body"/>--}}
-{{--                                                <input type="hidden" name="post_id" value="{{ $comment->post_id }}"/>--}}
-{{--                                                <input type="hidden" name="parent_id" value="{{ $comment->id }}"/>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="form-group">--}}
-{{--                                                <x-submit-button>Reply</x-submit-button>--}}
-{{--                                            </div>--}}
-{{--                                            <hr/>--}}
-{{--                                        </form>--}}
-{{--                                    </div>--}}
+                        <div x-show="show">
+                            @include('components.replies', ['comments' => $post->comments->skip(1), 'post_id' => $post->id])
+                        </div>
+                    </div>
 
 
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </article>--}}
-
-{{--                    </div>--}}
-{{--                    Replies of a specific comment--}}
-{{--                    <div class="ml-20">--}}
-{{--                            @include('components.replies', ['comments' => $comment->replies->take(1)])--}}
-
-{{--                        <div x-data="{ show: false }">--}}
-{{--                            <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"--}}
-{{--                                    :class="{ 'active': show }">--}}
-{{--                                Show Replies--}}
-{{--                            </button>--}}
-
-{{--                            <div x-show="show">--}}
-{{--                                @include('components.replies', ['comments' => $comment->replies->take(1)])--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-
-{{--                    </div>--}}
-{{--                    @endif--}}
-{{--                @endforeach--}}
-
-{{--                @if($comment->count() > 2 && !empty($comment))--}}
-{{--                    @if(!empty($comment))--}}
-{{--                    <div x-data="{ show: false }">--}}
-{{--                        <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"--}}
-{{--                                :class="{ 'active': show }">--}}
-{{--                            Load More--}}
-{{--                        </button>--}}
-{{--                        @endif--}}
-
-{{--                        <div x-show="show">--}}
-
-{{--                            @foreach($post->comments->skip(1) as $comment)--}}
-{{--                                <div class="display-comment">--}}
-{{--                                                            Main Comment Section--}}
-{{--                                                            <strong>{{ $comment->user->name }}</strong>--}}
-{{--                                    <article--}}
-{{--                                        class="flex bg-{{ "toggle" === "1" ? 'gray' : 'white' }}-100 border border-gray-200 p-6 rounded-xl space-x-4">--}}
-
-{{--                                        <div class="flex-shrink-0">--}}
-{{--                                            <img src="@if($comment->user->profile_image == null) {{asset('/storage/avatar/default_avatar.png')}} @else {{asset('/storage/profile_image/'.$comment->user->profile_image)}} @endif" style="--}}
-{{--                        width: 60px;--}}
-{{--                        height: 60px;--}}
-{{--                        background-size: cover;--}}
-{{--                        background-position: top center;--}}
-{{--                        border-radius: 50%;--}}
-{{--                        " alt="Avatar">--}}
-{{--                                        </div>--}}
-
-{{--                                        Body of the comment - Author of the comment, date of post, body--}}
-{{--                                        <div>--}}
-{{--                                            <header class="mb-4">--}}
-{{--                                                <h3 class="font-bold">{{ $comment->user->name }}</h3>--}}
-{{--                                                <p class="time-xs">Posted--}}
-{{--                                                    <time>{{ $comment->created_at }}</time>--}}
-{{--                                                </p>--}}
-{{--                                            </header>--}}
-{{--                                            <article> {!! $comment->body !!} </article>--}}
-
-{{--                                                                            Toggle function for creating a reply to a comment--}}
-{{--                                            <div x-data="{ show: false }">--}}
-{{--                                                <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"--}}
-{{--                                                        :class="{ 'active': show }">--}}
-{{--                                                    Toggle Show--}}
-{{--                                                </button>--}}
-
-{{--                                                <div x-show="show">--}}
-
-{{--                                                    <a href="" id="reply"></a>--}}
-{{--                                                                                            Form for the Reply Comment function--}}
-{{--                                                    <form method="post" action="{{ route('comments.store') }}">--}}
-{{--                                                        @csrf--}}
-{{--                                                        <div class="form-group">--}}
-{{--                                                            <x-form.textarea name="body"/>--}}
-{{--                                                            <input type="hidden" name="post_id" value="{{ $comment->post_id }}"/>--}}
-{{--                                                            <input type="hidden" name="parent_id" value="{{ $comment->id }}"/>--}}
-{{--                                                        </div>--}}
-{{--                                                        <div class="form-group">--}}
-{{--                                                            <x-submit-button>Reply</x-submit-button>--}}
-{{--                                                        </div>--}}
-{{--                                                        <hr/>--}}
-{{--                                                    </form>--}}
-{{--                                                </div>--}}
-
-
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </article>--}}
-
-{{--                                </div>--}}
-
-{{--                                <div class="ml-20">--}}
-{{--                                        @include('components.replies', ['comments' => $comment->replies])--}}
-
-{{--                                    <div x-data="{ show: false }">--}}
-{{--                                        <button @click="show = !show" :aria-expanded="show ? 'true' : 'false'"--}}
-{{--                                                :class="{ 'active': show }">--}}
-{{--                                            Show Replies--}}
-{{--                                        </button>--}}
-
-{{--                                        <div x-show="show">--}}
-{{--                                            @include('components.replies', ['comments' => $comment->replies])--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-
-{{--                                </div>--}}
-{{--                            @endforeach--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                @endif--}}
-
-
-{{--            </section>--}}
+            </section>
 
         </main>
 
