@@ -26,7 +26,7 @@ class PostService {
      * @return \Illuminate\Database\Eloquent\Collection
      */
     public static function getPost($id) {
-        return Post::findOrFaid($id);
+        return Post::find($id);
     }
 
     public static function createPost(PostRequest $request) {
