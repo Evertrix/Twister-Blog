@@ -42,6 +42,7 @@ and
 
     php artisan key:generate
 
+Make sure you set the correct database connection information before running the migrations.<br />
 Run the database migrations (**Set the database connection in .env before migrating**)
 
     php artisan migrate
@@ -60,7 +61,7 @@ You can now access the server at http://localhost:8000
     cp .env.example .env
     php artisan storage:link
 
-**Make sure you set the correct database connection information before running the migrations** [Environment variables](#environment-variables)
+**Make sure you set the correct database connection information before running the migrations**
 
     php artisan migrate
     php artisan serve
@@ -81,9 +82,21 @@ The api can be accessed at [http://localhost:8000/api](http://localhost:8000/api
 
 # Code overview
 
+## Frameworks & Tools
+
+-   [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework. You can use utility classes to control the layout, color, spacing, typography, shadows, and more to create a completely custom component design
+-   [SCSS](https://sass-lang.com/) - Style sheets in the advanced syntax are processed by the program, and turned into regular CSS style sheets.
+-   [Alpine.js](https://alpinejs.dev/) - Small and lightweight JavaScript tool. It enables adding JavaScript behavior to HTML markups at a much lower cost.
+
 ## Dependencies
 
+-   [Breeze](https://github.com/laravel/breeze) - Kit for implementation of application authentication.
 -   [smknstd/fakerphp-picsum-images](https://packagist.org/packages/smknstd/fakerphp-picsum-images) - For generating fake images
+
+## Integrations
+
+-   [Stripe, Payment Processing Platform](https://stripe.com/en-bg)
+-   [MailChimp](https://mailchimp.com/)
 
 ## Environment variables
 
@@ -104,6 +117,8 @@ Run the laravel development server
 The api can be accessed at
 
     http://localhost:8000/api
+
+    http://localhost:8000/api/posts/1
 
 ---
 
