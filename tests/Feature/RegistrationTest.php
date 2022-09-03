@@ -26,7 +26,8 @@ class RegistrationTest extends TestCase
             'password_confirmation' => 'password',
         ]);
 
-        $this->assertAuthenticated();
+//        $this->assertAuthenticated();
+        $this->assertGuest();
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }
