@@ -4,13 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\SessionsRequest;
-use App\Models\User;
 use App\Services\SessionsService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Validator;
-use Nette\Schema\ValidationException;
 
 class SessionsController extends Controller
 {
@@ -28,7 +22,10 @@ class SessionsController extends Controller
 //    }
 
     public function profile_page(){
-        return view('sessions.profile');
+        $token = SessionsService::profilePage();
+        return view('sessions.profile',
+            compact('token')
+        );
     }
 
     public function update(SessionsRequest $request){

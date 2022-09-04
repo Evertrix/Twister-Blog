@@ -2,13 +2,25 @@
 
 namespace App\Services;
 
-use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\SessionsRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class SessionsService{
+
+    public static function profilePage() {
+        $token = Str::random(64);
+
+        DB::table('password_resets')->insert([
+            'email' => Auth::user()->email,
+            'token' => $token,
+            'created_at' => Carbon::now()
+        ]);
+        return $token;
+    }
     public static function updateUser(SessionsRequest $request) {
 
         $user = Auth::user();
