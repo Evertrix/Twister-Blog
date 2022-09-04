@@ -32,12 +32,12 @@ Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])
                 ->middleware('guest')
                 ->name('password.email');
 
-Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])
-//                ->middleware('auth')
+Route::get('/reset-password/{token}', [NewPasswordController::class, 'showResetPasswordForm'])
+                ->middleware('auth')
                 ->name('password.reset');
 
-Route::post('/reset-password', [NewPasswordController::class, 'store'])
-//                ->middleware('auth')
+Route::post('/reset-password', [NewPasswordController::class, 'storeSend'])
+                ->middleware('auth')
                 ->name('password.update');
 
 Route::get('/verify-email', [EmailVerificationPromptController::class, '__invoke'])
