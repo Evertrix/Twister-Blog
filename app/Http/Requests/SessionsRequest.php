@@ -27,6 +27,7 @@ class SessionsRequest extends FormRequest
             'username' => 'nullable',
             'name' => 'nullable',
             'profile_image' => 'nullable',
+            'remember_token' => 'nullable'
         ];
     }
 }
