@@ -16,6 +16,15 @@
         <form method="POST" action="{{ route('password.confirm') }}">
             @csrf
 
+            <div>
+                <x-label for="email" :value="__('Email')" />
+
+                <x-input id="email" class="block mt-1 w-full"
+                         type="email"
+                         name="email"
+                         required autocomplete="current-email" />
+            </div>
+
             <!-- Password -->
             <div>
                 <x-label for="password" :value="__('Password')" />

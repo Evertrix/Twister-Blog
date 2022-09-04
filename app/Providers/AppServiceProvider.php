@@ -27,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
 
             return new MailchimpNewsletter($client);
         });
+
+        if (!$this->app->environment('production')) {
+            $this->app->register('App\Providers\FakerServiceProvider');
+        }
     }
 
     /**

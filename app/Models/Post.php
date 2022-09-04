@@ -23,8 +23,7 @@ class Post extends Model implements HasMedia
 //        'category_id',
 //    ];
 
-    public function scopeFilter($query, $filters)
-    { // Post::newQuery()->filter();
+    public function scopeFilter($query, $filters) {
         if ($filters['search'] ?? false) {
             $query->where(fn($query) => $query->where('title', 'like', '%' . request('search') . '%')
                 ->orWhere('body', 'like', '%' . request('search') . '%')
@@ -38,12 +37,6 @@ class Post extends Model implements HasMedia
         $query->when($filters['user'] ?? false, fn($query, $user) => $query->whereHas('user', fn($query) => $query->where('username', $user)
         ),
         );
-//            $query
-//                ->whereExists(fn($query) =>
-//                    $query->from('categories')
-//                        ->whereColumn('categories.id', 'posts.category_id')
-//                        ->where('categories.slug', $category))
-//                );
     }
 
     public function getRouteKeyName()
@@ -51,9 +44,12 @@ class Post extends Model implements HasMedia
         return 'slug';
     }
 
+    public function setSlugAttribute($value) {
+        $this->attributes['slug'] = str_replace(" ", "-", lcfirst($value));
+    }
+
     public function comments()
     {
-        // hasOne, hasMany, belongsTo, belongsToMany
         return $this->hasMany(Comment::class)->whereNull('parent_id'); // A Post has Many comments
     }
 

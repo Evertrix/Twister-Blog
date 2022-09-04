@@ -7,58 +7,123 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+# About
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Twister Blog is a paid blog platform using Stripe's sandbox payment process. It can be used to create content that can be published on the platform. 
+Every post can have a category and can be searched for from the search bar. 
+The payment is processed with Stripe. The User must pay a monthly subscription in order to be allowed to make publications.
+Users free of charge are only allowed to read and comment under a certain post.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Clone the repository
 
-## Learning Laravel
+    git clone https://github.com/Evgeni-Georgiev/Platform-for-hiring-part-time-developers.git
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Switch to the repo folder
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    cd Platform-for-hiring-part-time-developers
 
-## Laravel Sponsors
+Update and install all the dependencies using composer
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+    composer update
 
-### Premium Partners
+    composer install
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
+Copy the example env file and make the required configuration changes in the .env file
 
-## Contributing
+    cp .env.example .env
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Generate a new application key
 
-## Code of Conduct
+    php artisan storage:link
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+and
 
-## Security Vulnerabilities
+    php artisan key:generate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Make sure you set the correct database connection information before running the migrations.<br />
+Run the database migrations (**Set the database connection in .env before migrating**)
 
-## License
+    php artisan migrate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Start the local development server
+
+    php artisan serve
+
+You can now access the server at http://localhost:8000
+
+**TL;DR command list**
+
+    git clone https://github.com/Evgeni-Georgiev/Platform-for-hiring-part-time-developers.git
+    cd Platform-for-hiring-part-time-developers
+    composer install
+    cp .env.example .env
+    php artisan storage:link
+
+**Make sure you set the correct database connection information before running the migrations**
+
+    php artisan migrate
+    php artisan serve
+
+## Database seeding
+
+Run the database seeder
+
+    php artisan db:seed
+
+**_Note_** : It's recommended to have a clean database before seeding. You can refresh your migrations at any point to clean the database by running the following command
+
+    php artisan migrate:refresh
+
+The api can be accessed at [http://localhost:8000/api](http://localhost:8000/api).
+
+---
+
+# Code overview
+
+## Frameworks & Tools
+
+-   [TailwindCSS](https://tailwindcss.com/) - Utility-first CSS framework. You can use utility classes to control the layout, color, spacing, typography, shadows, and more to create a completely custom component design
+-   [SCSS](https://sass-lang.com/) - Style sheets in the advanced syntax are processed by the program, and turned into regular CSS style sheets.
+-   [Alpine.js](https://alpinejs.dev/) - Small and lightweight JavaScript tool. It enables adding JavaScript behavior to HTML markups at a much lower cost.
+
+## Dependencies
+
+-   [Breeze](https://github.com/laravel/breeze) - Kit for implementation of application authentication.
+-   [smknstd/fakerphp-picsum-images](https://packagist.org/packages/smknstd/fakerphp-picsum-images) - For generating fake images
+
+## Integrations
+
+-   [Stripe, Payment Processing Platform](https://stripe.com/en-bg)
+-   [MailChimp](https://mailchimp.com/)
+
+## Environment variables
+
+-   `.env` - Environment variables can be set in this file
+
+**_Note_** : You can quickly set the database information and other variables in this file and have the application fully working.
+
+---
+
+# Testing API
+
+The application has a simple REST API
+
+Run the laravel development server
+
+    php artisan serve
+
+The api can be accessed at
+
+    http://localhost:8000/api
+
+    http://localhost:8000/api/posts/1
+
+---
+
+# Performing Unit tests
+
+Unit tests were made for testing the functionalities of the application.
+
+    php artisan test
