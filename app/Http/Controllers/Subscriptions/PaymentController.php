@@ -25,20 +25,11 @@ class PaymentController extends Controller
 
         $plans->identifier = $request->get('payment_button');
 
-//        $plan = Plans::where('identifier', $request->plan)
-////            ->orwhere('identifier', 'basic')
-////            ->orWhere('identifier', 'premium')
-////            ->orWhere('identifier', 'business')
-//                ->orWhere('identifier', $plans->identifier)
-//            ->get();
-
         if($request->payment_button == $plans->identifier){
             $plan = Plans::where('identifier', $request->plan)
                 ->orWhere('identifier', $plans->identifier)
                 ->first();
         }
-
-//        return back();
 
         $request->user()->newSubscription('default', $plan->stripe_id)->create($request->token);
 

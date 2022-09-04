@@ -4,8 +4,6 @@
         <x-panel>
             <form action="{{route('comments.store')}}" method="POST">
                 @csrf
-                {{--{{asset('/storage/profile_image/'.Auth::user()->profile_image)}}--}}
-{{--                @if($post->user->profile_image === null) {{asset('/storage/avatar/default_avatar.png')}} @else {{asset('/storage/profile_image/'.$post->user->profile_image)}} @endif--}}
                 <header class="flex items-center">
                     <img src="@if(Auth::user()->profile_image === null) {{asset('/storage/avatar/default_avatar.png')}} @else {{asset('/storage/profile_image/'.Auth::user()->profile_image)}} @endif" style="
                         width: 60px;
